@@ -11,7 +11,6 @@ object "C_7" {
     code {
         {
             /// @src 0:62:285  "contract C {..."
-            mstore(64, 128)
             if callvalue() { revert(0, 0) }
             let _1 := datasize("C_7_deployed")
             codecopy(128, dataoffset("C_7_deployed"), _1)
@@ -23,7 +22,6 @@ object "C_7" {
         code {
             {
                 /// @src 0:62:285  "contract C {..."
-                mstore(64, 128)
                 if callvalue() { revert(0, 0) }
                 /// @src 0:109:277  "assembly {..."
                 mstore(0, 100)

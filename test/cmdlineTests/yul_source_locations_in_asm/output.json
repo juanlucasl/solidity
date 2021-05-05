@@ -1,5 +1,4 @@
 {"contracts":{"C":{"C":{"evm":{"assembly":"    /* \"C\":79:428  contract C... */
-  mstore(0x40, 0xa0)
   jumpi(tag_1, iszero(callvalue))
   0x00
   dup1
@@ -428,7 +427,6 @@ sub_0: assembly {
     auxdata: <AUXDATA REMOVED>
 }
 "}}},"D":{"D":{"evm":{"assembly":"    /* \"D\":91:166  contract D is C(3)... */
-  mstore(0x40, 0xa0)
   jumpi(tag_1, iszero(callvalue))
   0x00
   dup1
@@ -501,13 +499,8 @@ tag_4:
 tag_5:
     /* \"C\":147:149  42 */
   mstore(0x80, 0x2a)
-    /* \"D\":107:108  3 */
-  0x03
-    /* \"C\":203:219  stateVar = _init */
-  0x00
-    /* \"D\":91:166  contract D is C(3)... */
-  sstore
   sub(shl(0xff, 0x01), 0x04)
+    /* \"D\":91:166  contract D is C(3)... */
   dup2
   sgt
   0x01
@@ -515,17 +508,9 @@ tag_5:
   iszero
   tag_8
   jumpi
-  shl(0xe0, 0x4e487b71)
-    /* \"C\":203:219  stateVar = _init */
-  0x00
-    /* \"D\":91:166  contract D is C(3)... */
-  mstore
+  mstore(0x00, shl(0xe0, 0x4e487b71))
   mstore(0x04, 0x11)
-  0x24
-    /* \"C\":203:219  stateVar = _init */
-  0x00
-    /* \"D\":91:166  contract D is C(3)... */
-  revert
+  revert(0x00, 0x24)
 tag_8:
     /* \"D\":107:108  3 */
   0x03

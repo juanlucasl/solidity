@@ -11,7 +11,6 @@ object "Arraysum_34" {
     code {
         {
             /// @src 0:80:429  "contract Arraysum {..."
-            mstore(64, 128)
             if callvalue() { revert(0, 0) }
             let _1 := datasize("Arraysum_34_deployed")
             codecopy(128, dataoffset("Arraysum_34_deployed"), _1)
