@@ -198,6 +198,11 @@ bool Predicate::isInterface() const
 	return m_type == PredicateType::Interface;
 }
 
+bool Predicate::isNondetInterface() const
+{
+	return m_type == PredicateType::NondetInterface;
+}
+
 string Predicate::formatSummaryCall(
 	vector<smtutil::Expression> const& _args,
 	langutil::CharStreamProvider const& _charStreamProvider
