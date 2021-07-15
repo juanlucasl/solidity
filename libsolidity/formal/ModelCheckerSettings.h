@@ -123,6 +123,7 @@ struct ModelCheckerSettings
 	/// might prefer the precise encoding.
 	bool divModNoSlacks = false;
 	ModelCheckerEngine engine = ModelCheckerEngine::None();
+	bool invariants = false;
 	bool showUnproved = false;
 	smtutil::SMTSolverChoice solvers = smtutil::SMTSolverChoice::All();
 	ModelCheckerTargets targets = ModelCheckerTargets::Default();
@@ -135,6 +136,7 @@ struct ModelCheckerSettings
 			contracts == _other.contracts &&
 			divModNoSlacks == _other.divModNoSlacks &&
 			engine == _other.engine &&
+			invariants == _other.invariants &&
 			showUnproved == _other.showUnproved &&
 			solvers == _other.solvers &&
 			targets == _other.targets &&

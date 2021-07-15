@@ -91,6 +91,7 @@ static string const g_strMetadataLiteral = "metadata-literal";
 static string const g_strModelCheckerContracts = "model-checker-contracts";
 static string const g_strModelCheckerDivModNoSlacks = "model-checker-div-mod-no-slacks";
 static string const g_strModelCheckerEngine = "model-checker-engine";
+static string const g_strModelCheckerInvariants = "model-checker-invariants";
 static string const g_strModelCheckerShowUnproved = "model-checker-show-unproved";
 static string const g_strModelCheckerSolvers = "model-checker-solvers";
 static string const g_strModelCheckerTargets = "model-checker-targets";
@@ -783,6 +784,10 @@ General Information)").c_str(),
 			"Select model checker engine."
 		)
 		(
+			g_strModelCheckerInvariants.c_str(),
+			"Select whether to report inferred contract inductive invariants."
+		)
+		(
 			g_strModelCheckerShowUnproved.c_str(),
 			"Show all unproved targets separately."
 		)
@@ -1220,6 +1225,9 @@ bool CommandLineParser::processArgs()
 		m_options.modelChecker.settings.engine = *engine;
 	}
 
+	if (m_args.count(g_strModelCheckerInvariants))
+		m_options.modelChecker.settings.invariants = true;
+
 	if (m_args.count(g_strModelCheckerShowUnproved))
 		m_options.modelChecker.settings.showUnproved = true;
 
@@ -1255,6 +1263,7 @@ bool CommandLineParser::processArgs()
 		m_args.count(g_strModelCheckerContracts) ||
 		m_args.count(g_strModelCheckerDivModNoSlacks) ||
 		m_args.count(g_strModelCheckerEngine) ||
+		m_args.count(g_strModelCheckerInvariants) ||
 		m_args.count(g_strModelCheckerShowUnproved) ||
 		m_args.count(g_strModelCheckerSolvers) ||
 		m_args.count(g_strModelCheckerTargets) ||

@@ -1722,20 +1722,21 @@ void CHC::checkVerificationTargets()
 			" Consider increasing the timeout per query."
 		);
 
-	for (auto const& [node, invs]: m_invariants)
-	{
-		string what;
-		if (auto contract = dynamic_cast<ContractDefinition const*>(node))
-			what = contract->fullyQualifiedName();
-		string msg = "Contract invariants for " + what + ":\n";
-		for (auto const& inv: invs)
-			msg += inv + "\n";
-		m_errorReporter.warning(
-			0000_error,
-			node->location(),
-			msg
-		);
-	}
+	if (m_settings.invariants)
+		for (auto const& [node, invs]: m_invariants)
+		{
+			string what;
+			if (auto contract = dynamic_cast<ContractDefinition const*>(node))
+				what = contract->fullyQualifiedName();
+			string msg = "Contract invariants and external call properties for " + what + ":\n";
+			for (auto const& inv: invs)
+				msg += inv + "\n";
+			m_errorReporter.warning(
+				1180_error,
+				node->location(),
+				msg
+			);
+		}
 
 	// There can be targets in internal functions that are not reachable from the external interface.
 	// These are safe by definition and are not even checked by the CHC engine, but this information

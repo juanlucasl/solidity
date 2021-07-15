@@ -106,9 +106,9 @@ void FuzzerUtil::testCompiler(
 			frontend::ModelCheckerContracts::Default(),
 			/*divModWithSlacks*/true,
 			frontend::ModelCheckerEngine::All(),
+			/*invariants*/false,
 			/*showUnproved=*/false,
 			smtutil::SMTSolverChoice::All(),
-			frontend::ModelCheckerTargets::Default(),
 			/*timeout=*/1
 		});
 	}
