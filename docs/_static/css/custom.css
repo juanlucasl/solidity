@@ -1,14 +1,49 @@
 pre {
-  white-space: pre-wrap;       /* css-3 */
-  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word;
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;
 }
 
 .wy-table-responsive table td, .wy-table-responsive table th {
-  white-space: normal;
+    white-space: normal;
 }
 .rst-content table.docutils td {
-  vertical-align: top;
+    vertical-align: top;
+}
+
+p.remix-link-container {
+    /* Positioned in the top-right corner of the box containing the text snippet that follows it,
+     * with a small margin around it. Should not add any extra space above the snippet box. */
+    position: relative;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+/* Link to Remix IDE shown over code snippets */
+a.remix-link {
+    /* Stick to the inner side of the right border of the parent. */
+    position: absolute;
+    right: 0;
+}
+
+a.remix-link .link-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    background: url("../img/share-solid.svg") no-repeat;
+}
+
+a.remix-link .link-text {
+    display: inline-block;
+    width: 3.3em;          /* Narrow enough to get two lines of text. */
+    margin-left: 0.5em;
+    font-size: 0.8em;
+    line-height: normal;
+    color: black;
+}
+
+a.remix-link:hover {
+    opacity: 0.5;
 }
