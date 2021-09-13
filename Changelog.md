@@ -7,6 +7,7 @@ Language Features:
 
 
 Compiler Features:
+ * Commandline Interface: Add ``--debug-info`` option for selecting how much extra debug information should be included in the produced EVM assembly and Yul code.
  * Commandline Interface: Do not implicitly run evm bytecode generation unless needed for the requested output.
  * Commandline Interface: Normalize paths specified on the command line and make them relative for files located inside base path.
  * Immutable variables can be read at construction time once they are initialized.
@@ -15,6 +16,7 @@ Compiler Features:
  * SMTChecker: Support the ``value`` option for external function calls.
  * SMTChecker: Support constants via modules.
  * SMTChecker: Support user defined value types.
+ * Standard JSON: Add ``settings.debug.debugInfo`` option for selecting how much extra debug information should be included in the produced EVM assembly and Yul code.
 
 
 Bugfixes:
