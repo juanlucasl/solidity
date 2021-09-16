@@ -200,7 +200,8 @@ bool Predicate::isInterface() const
 
 string Predicate::formatSummaryCall(
 	vector<smtutil::Expression> const& _args,
-	langutil::CharStreamProvider const& _charStreamProvider
+	langutil::CharStreamProvider const& _charStreamProvider,
+	bool _appendTxVars
 ) const
 {
 	solAssert(isSummary(), "");
@@ -214,19 +215,64 @@ string Predicate::formatSummaryCall(
 	}
 
 	/// The signature of a function summary predicate is: summary(error, this, abiFunctions, cryptoFunctions, txData, preBlockChainState, preStateVars, preInputVars, postBlockchainState, postStateVars, postInputVars, outputVars).
-	/// Here we are interested in preInputVars to format the function call,
-	/// and in txData to retrieve `msg.value`.
+	/// Here we are interested in preInputVars to format the function call.
 
-	string value;
-	if (auto v = readTxVars(_args.at(4)).at("msg.value"))
+	string txModel;
+
+	if (_appendTxVars)
 	{
-		bigint x(*v);
-		if (x > 0)
-			value = "{ value: " + *v + " }";
+		set<string> txVars;
+		if (isFunctionSummary() && programFunction()->isPayable())
+			txVars.insert("msg.value");
+		else if (isConstructorSummary())
+		{
+			auto fun = programFunction();
+			if (fun && fun->isPayable())
+				txVars.insert("msg.value");
+		}
+
+		struct TxVarsVisitor: public ASTConstVisitor
+		{
+			bool visit(MemberAccess const& _memberAccess)
+			{
+				Expression const* memberExpr = SMTEncoder::innermostTuple(_memberAccess.expression());
+
+				auto const& exprType = memberExpr->annotation().type;
+				solAssert(exprType, "");
+				if (exprType->category() == Type::Category::Magic)
+				{
+					if (auto const* identifier = dynamic_cast<Identifier const*>(memberExpr))
+					{
+						auto const& name = identifier->name();
+						if (name == "block" || name == "msg" || name == "tx")
+							txVars.insert(name + "." + _memberAccess.memberName());
+					}
+				}
+
+				return true;
+			}
+
+			set<string> txVars;
+		} txVarsVisitor;
+
+		if (auto fun = programFunction())
+		{
+			fun->accept(txVarsVisitor);
+			txVars += txVarsVisitor.txVars;
+		}
+
+		auto txValues = readTxVars(_args.at(4));
+		vector<string> values;
+		for (auto const& _var: txVars)
+			if (auto v = txValues.at(_var))
+				values.push_back(_var + ": " + *v);
+
+		if (!values.empty())
+			txModel = "{ " + boost::algorithm::join(values, ", ") + " }";
 	}
 
 	if (auto contract = programContract())
-		return contract->name() + ".constructor()" + value;
+		return contract->name() + ".constructor()" + txModel;
 
 	auto stateVars = stateVariables();
 	solAssert(stateVars.has_value(), "");
@@ -262,7 +308,7 @@ string Predicate::formatSummaryCall(
 		solAssert(fun->annotation().contract, "");
 		prefix = fun->annotation().contract->name() + ".";
 	}
-	return prefix + fName + "(" + boost::algorithm::join(functionArgs, ", ") + ")" + value;
+	return prefix + fName + "(" + boost::algorithm::join(functionArgs, ", ") + ")" + txModel;
 }
 
 vector<optional<string>> Predicate::summaryStateValues(vector<smtutil::Expression> const& _args) const

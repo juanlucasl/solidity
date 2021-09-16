@@ -5,6 +5,8 @@ Language Features:
 
 Compiler Features:
 
+Compiler Features:
+ * SMTChecker: Output values for ``block.*``, ``msg.*`` and ``tx.*`` variables that are present in the called functions.
 
 
 Bugfixes:
