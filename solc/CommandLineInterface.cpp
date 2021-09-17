@@ -992,7 +992,8 @@ bool CommandLineInterface::assemble(yul::AssemblyStack::Language _language, yul:
 		auto& stack = assemblyStacks[src.first] = yul::AssemblyStack(
 			m_options.output.evmVersion,
 			_language,
-			m_options.optimiserSettings()
+			m_options.optimiserSettings(),
+			DebugInfoSelection::Default()
 		);
 
 		try
