@@ -11,5 +11,6 @@ contract C {
 }
 // ====
 // SMTEngine: all
+// SMTIgnoreOS: osx
 // ----
 // Warning 6328: (135-169): CHC: Assertion violation happens here.\nCounterexample:\n\n_i = 0\nx = 841\n\nTransaction trace:\nC.constructor()\nC.g(0){ msg.value: 38 }\n    _i.f() -- untrusted external call, synthesized as:\n        C.g(0){ msg.value: 0 } -- reentrant call\n            _i.f() -- untrusted external call
