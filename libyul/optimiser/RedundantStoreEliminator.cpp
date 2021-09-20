@@ -264,6 +264,9 @@ vector<RedundantStoreEliminator::Operation> RedundantStoreEliminator::operations
 				// Unknown read includes unknown write.
 				Operation{Location::Storage, Effect::Read, {}, {}},
 			};
+		case Instruction::MSIZE:
+			// This is just to satisfy the assert below.
+			return vector<Operation>{};
 		default:
 			yulAssert(
 				evmasm::SemanticInformation::storage(*instruction) ==
