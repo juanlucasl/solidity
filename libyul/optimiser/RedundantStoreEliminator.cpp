@@ -172,6 +172,7 @@ vector<RedundantStoreEliminator::Operation> RedundantStoreEliminator::operations
 		case Instruction::SLOAD:
 		case Instruction::MSTORE:
 		case Instruction::MSTORE8:
+		case Instruction::MLOAD:
 		case Instruction::REVERT:
 		case Instruction::RETURN:
 		case Instruction::EXTCODECOPY:
@@ -264,6 +265,22 @@ vector<RedundantStoreEliminator::Operation> RedundantStoreEliminator::operations
 				Operation{Location::Storage, Effect::Read, {}, {}},
 			};
 		default:
+			yulAssert(
+				evmasm::SemanticInformation::storage(*instruction) ==
+				evmasm::SemanticInformation::None,
+				""
+			);
+			yulAssert(
+				evmasm::SemanticInformation::memory(*instruction) ==
+				evmasm::SemanticInformation::None,
+				""
+			);
+			yulAssert(
+				sideEffects.memory == SideEffects::Effect::None &&
+				sideEffects.storage == SideEffects::Effect::None,
+				""
+			);
+
 			break;
 		}
 	}
