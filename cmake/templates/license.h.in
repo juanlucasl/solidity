@@ -112,6 +112,12 @@ evmc:
    See the License for the specific language governing permissions and
    limitations under the License.
 
+docs/_static/img/share-solid.svg
+  The icon is a part of Font Awesome 5.15.0 and was downloaded from
+  https://fontawesome.com/v5.15/icons/share?style=solid.
+  Licensed under the Creative Commons Attribution 4.0 International license
+  https://fontawesome.com/license/free.
+
 
 All other code is licensed under GPL version 3:
 
