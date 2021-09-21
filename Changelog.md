@@ -8,6 +8,7 @@ Compiler Features:
 
 
 Bugfixes:
+ * Code Generator: Fixes source mappings for immutables.
 
 
 
