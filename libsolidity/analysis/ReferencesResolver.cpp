@@ -219,7 +219,7 @@ void ReferencesResolver::operator()(yul::Identifier const& _identifier)
 {
 	solAssert(nativeLocationOf(_identifier) == originLocationOf(_identifier), "");
 
-	static set<string> suffixes{"slot", "offset", "length"};
+	static set<string> suffixes{"slot", "offset", "length", "address", "selector"};
 	string suffix;
 	for (string const& s: suffixes)
 		if (boost::algorithm::ends_with(_identifier.name.str(), "." + s))

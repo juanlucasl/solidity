@@ -818,6 +818,16 @@ bool ContractCompiler::visit(InlineAssembly const& _inlineAssembly)
 							if (suffix == "length")
 								stackDiff--;
 						}
+						else if (
+							auto const* functionType = dynamic_cast<FunctionType const*>(variable->type());
+							functionType && functionType->kind() == FunctionType::Kind::External
+						)
+						{
+							solAssert(suffix == "selector" || suffix == "address", "");
+							solAssert(variable->type()->sizeOnStack() == 2, "");
+							if (suffix == "selector")
+								stackDiff--;
+						}
 						else
 							solAssert(false, "");
 					}
@@ -883,6 +893,16 @@ bool ContractCompiler::visit(InlineAssembly const& _inlineAssembly)
 					solAssert(variable->type()->sizeOnStack() == 1, "");
 					solAssert(suffix.empty(), "");
 				}
+			}
+			else if (
+				auto const* functionType = dynamic_cast<FunctionType const*>(variable->type());
+				functionType && functionType->kind() == FunctionType::Kind::External
+			)
+			{
+				solAssert(suffix == "selector" || suffix == "address", "");
+				solAssert(variable->type()->sizeOnStack() == 2, "");
+				if (suffix == "selector")
+					stackDiff--;
 			}
 			else
 				solAssert(suffix.empty(), "");

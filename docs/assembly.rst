@@ -136,6 +136,34 @@ evaluate to the address of the variable in calldata, not the value itself.
 The variable can also be assigned a new offset, but note that no validation to ensure that
 the variable will not point beyond ``calldatasize()`` is performed.
 
+For external function pointers the address and the function selector can be
+accessed using ``x.address`` and ``x.selector``.
+The selector consists of four right-aligned bytes.
+Both values are can be assigned to. For example:
+
+.. code-block:: solidity
+    :force:
+
+    // SPDX-License-Identifier: GPL-3.0
+    pragma solidity >=0.8.9 <0.9.0;
+
+    contract C {
+        function externalFunction() external {}
+
+        // Assigns a new selector and address to the local variable fp
+        function assignSelector(address newAddress, uint newSelector) view public {
+            function() external fp = this.externalFunction;
+
+            assembly {
+                fp.selector := newSelector
+                fp.address  := newAddress
+            }
+
+            assert(fp.address == newAddress);
+            assert(fp.selector == bytes4(bytes32(newSelector)));
+        }
+    }
+
 For dynamic calldata arrays, you can access
 their calldata offset (in bytes) and length (number of elements) using ``x.offset`` and ``x.length``.
 Both expressions can also be assigned to, but as for the static case, no validation will be performed

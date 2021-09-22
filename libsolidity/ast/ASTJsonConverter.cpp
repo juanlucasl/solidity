@@ -178,9 +178,20 @@ Json::Value ASTJsonConverter::inlineAssemblyIdentifierToJson(pair<yul::Identifie
 	tuple["declaration"] = idOrNull(_info.second.declaration);
 	tuple["isSlot"] = Json::Value(_info.second.suffix == "slot");
 	tuple["isOffset"] = Json::Value(_info.second.suffix == "offset");
+
 	if (!_info.second.suffix.empty())
 		tuple["suffix"] = Json::Value(_info.second.suffix);
+
 	tuple["valueSize"] = Json::Value(Json::LargestUInt(_info.second.valueSize));
+	if (
+		auto const* functionType = dynamic_cast<FunctionType const*>(_info.second.declaration->type());
+		functionType && functionType->kind() == FunctionType::Kind::External
+	)
+	{
+		tuple["isSelector"] = Json::Value(_info.second.suffix == "selector");
+		tuple["isAddress"] = Json::Value(_info.second.suffix == "address");
+	}
+
 	return tuple;
 }
 
