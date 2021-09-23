@@ -1341,7 +1341,7 @@ bool SMTEncoder::visit(MemberAccess const& _memberAccess)
 				);
 		}
 		else
-			solUnimplementedAssert(false, "");
+			solUnimplemented("");
 
 		return false;
 	}
