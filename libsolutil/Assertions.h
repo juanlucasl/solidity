@@ -45,6 +45,8 @@ namespace assertions
 
 inline std::string stringOrDefault(std::string _string, std::string _defaultString)
 {
+	// NOTE: Putting this in a function rather than directly in a macro prevents the string from
+	// being evaluated multiple times if it's not just a literal.
 	return (!_string.empty() ? _string : _defaultString);
 }
 
