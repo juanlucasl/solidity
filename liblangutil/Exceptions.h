@@ -28,6 +28,8 @@
 #include <libsolutil/CommonData.h>
 #include <liblangutil/SourceLocation.h>
 
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/facilities/empty.hpp>
 #include <boost/preprocessor/facilities/overload.hpp>
 
 #include <string>
@@ -49,7 +51,11 @@ struct InvalidAstError: virtual util::Exception {};
 
 
 /// Assertion that throws an InternalCompilerError containing the given description if it is not met.
+#if !BOOST_PP_VARIADICS_MSVC
 #define solAssert(...) BOOST_PP_OVERLOAD(solAssert_,__VA_ARGS__)(__VA_ARGS__)
+#else
+#define solAssert(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(solAssert_,__VA_ARGS__)(__VA_ARGS__),BOOST_PP_EMPTY())
+#endif
 
 #define solAssert_1(CONDITION) \
 	solAssert_2(CONDITION, "")
@@ -64,7 +70,11 @@ struct InvalidAstError: virtual util::Exception {};
 
 
 /// Assertion that throws an UnimplementedFeatureError containing the given description if it is not met.
+#if !BOOST_PP_VARIADICS_MSVC
 #define solUnimplementedAssert(...) BOOST_PP_OVERLOAD(solUnimplementedAssert_,__VA_ARGS__)(__VA_ARGS__)
+#else
+#define solUnimplementedAssert(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(solUnimplementedAssert_,__VA_ARGS__)(__VA_ARGS__),BOOST_PP_EMPTY())
+#endif
 
 #define solUnimplementedAssert_1(CONDITION) \
 	solUnimplementedAssert_2(CONDITION, "")
@@ -84,7 +94,11 @@ struct InvalidAstError: virtual util::Exception {};
 
 
 /// Assertion that throws an InvalidAstError containing the given description if it is not met.
+#if !BOOST_PP_VARIADICS_MSVC
 #define astAssert(...) BOOST_PP_OVERLOAD(astAssert_,__VA_ARGS__)(__VA_ARGS__)
+#else
+#define astAssert(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(astAssert_,__VA_ARGS__)(__VA_ARGS__),BOOST_PP_EMPTY())
+#endif
 
 #define astAssert_1(CONDITION) \
 	astAssert_2(CONDITION, "")

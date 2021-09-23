@@ -21,6 +21,8 @@
 #include <libsolutil/Assertions.h>
 #include <libsolutil/Exceptions.h>
 
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/facilities/empty.hpp>
 #include <boost/preprocessor/facilities/overload.hpp>
 
 namespace solidity::smtutil
@@ -29,7 +31,11 @@ namespace solidity::smtutil
 struct SMTLogicError: virtual util::Exception {};
 
 /// Assertion that throws an SMTLogicError containing the given description if it is not met.
+#if !BOOST_PP_VARIADICS_MSVC
 #define smtAssert(...) BOOST_PP_OVERLOAD(smtAssert_,__VA_ARGS__)(__VA_ARGS__)
+#else
+#define smtAssert(...) BOOST_PP_CAT(BOOST_PP_OVERLOAD(smtAssert_,__VA_ARGS__)(__VA_ARGS__),BOOST_PP_EMPTY())
+#endif
 
 #define smtAssert_1(CONDITION) \
 	smtAssert_2(CONDITION, "")
