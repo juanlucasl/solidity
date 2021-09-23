@@ -21,12 +21,25 @@
 #include <libsolutil/Assertions.h>
 #include <libsolutil/Exceptions.h>
 
+#include <boost/preprocessor/facilities/overload.hpp>
+
 namespace solidity::smtutil
 {
 
 struct SMTLogicError: virtual util::Exception {};
 
-#define smtAssert(CONDITION, DESCRIPTION) \
-	assertThrowWithDefaultDescription(CONDITION, SMTLogicError, DESCRIPTION, "SMT assertion failed")
+/// Assertion that throws an SMTLogicError containing the given description if it is not met.
+#define smtAssert(...) BOOST_PP_OVERLOAD(smtAssert_,__VA_ARGS__)(__VA_ARGS__)
+
+#define smtAssert_1(CONDITION) \
+	smtAssert_2(CONDITION, "")
+
+#define smtAssert_2(CONDITION, DESCRIPTION) \
+	assertThrowWithDefaultDescription( \
+		CONDITION, \
+		::solidity::smtutil::SMTLogicError, \
+		DESCRIPTION, \
+		"SMT assertion failed" \
+	)
 
 }

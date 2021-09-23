@@ -26,6 +26,8 @@
 
 #include <libyul/YulString.h>
 
+#include <boost/preprocessor/facilities/overload.hpp>
+
 namespace solidity::yul
 {
 
@@ -52,7 +54,17 @@ struct StackTooDeepError: virtual YulException
 };
 
 /// Assertion that throws an YulAssertion containing the given description if it is not met.
-#define yulAssert(CONDITION, DESCRIPTION) \
-	assertThrowWithDefaultDescription(CONDITION, ::solidity::yul::YulAssertion, DESCRIPTION, "Yul assertion failed")
+#define yulAssert(...) BOOST_PP_OVERLOAD(yulAssert_,__VA_ARGS__)(__VA_ARGS__)
+
+#define yulAssert_1(CONDITION) \
+	yulAssert_2(CONDITION, "")
+
+#define yulAssert_2(CONDITION, DESCRIPTION) \
+	assertThrowWithDefaultDescription( \
+		CONDITION, \
+		::solidity::yul::YulAssertion, \
+		DESCRIPTION, \
+		"Yul assertion failed" \
+	)
 
 }

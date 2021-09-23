@@ -28,6 +28,8 @@
 #include <libsolutil/CommonData.h>
 #include <liblangutil/SourceLocation.h>
 
+#include <boost/preprocessor/facilities/overload.hpp>
+
 #include <string>
 #include <utility>
 #include <vector>
@@ -45,18 +47,56 @@ struct FatalError: virtual util::Exception {};
 struct UnimplementedFeatureError: virtual util::Exception {};
 struct InvalidAstError: virtual util::Exception {};
 
+
 /// Assertion that throws an InternalCompilerError containing the given description if it is not met.
-#define solAssert(CONDITION, DESCRIPTION) \
-	assertThrowWithDefaultDescription(CONDITION, ::solidity::langutil::InternalCompilerError, DESCRIPTION, "Solidity assertion failed")
+#define solAssert(...) BOOST_PP_OVERLOAD(solAssert_,__VA_ARGS__)(__VA_ARGS__)
 
-#define solUnimplementedAssert(CONDITION, DESCRIPTION) \
-	assertThrowWithDefaultDescription(CONDITION, ::solidity::langutil::UnimplementedFeatureError, DESCRIPTION, "Unimplemented feature")
+#define solAssert_1(CONDITION) \
+	solAssert_2(CONDITION, "")
 
+#define solAssert_2(CONDITION, DESCRIPTION) \
+	assertThrowWithDefaultDescription( \
+		CONDITION, \
+		::solidity::langutil::InternalCompilerError, \
+		DESCRIPTION, \
+		"Solidity assertion failed" \
+	)
+
+
+/// Assertion that throws an UnimplementedFeatureError containing the given description if it is not met.
+#define solUnimplementedAssert(...) BOOST_PP_OVERLOAD(solUnimplementedAssert_,__VA_ARGS__)(__VA_ARGS__)
+
+#define solUnimplementedAssert_1(CONDITION) \
+	solUnimplementedAssert_2(CONDITION, "")
+
+#define solUnimplementedAssert_2(CONDITION, DESCRIPTION) \
+	assertThrowWithDefaultDescription( \
+		CONDITION, \
+		::solidity::langutil::UnimplementedFeatureError, \
+		DESCRIPTION, \
+		"Unimplemented feature" \
+	)
+
+
+/// Helper that unconditionally reports an unimplemented feature.
 #define solUnimplemented(DESCRIPTION) \
 	solUnimplementedAssert(false, DESCRIPTION)
 
-#define astAssert(CONDITION, DESCRIPTION) \
-	assertThrowWithDefaultDescription(CONDITION, ::solidity::langutil::InvalidAstError, DESCRIPTION, "AST assertion failed")
+
+/// Assertion that throws an InvalidAstError containing the given description if it is not met.
+#define astAssert(...) BOOST_PP_OVERLOAD(astAssert_,__VA_ARGS__)(__VA_ARGS__)
+
+#define astAssert_1(CONDITION) \
+	astAssert_2(CONDITION, "")
+
+#define astAssert_2(CONDITION, DESCRIPTION) \
+	assertThrowWithDefaultDescription( \
+		CONDITION, \
+		::solidity::langutil::InvalidAstError, \
+		DESCRIPTION, \
+		"AST assertion failed" \
+	)
+
 
 using errorSourceLocationInfo = std::pair<std::string, SourceLocation>;
 
