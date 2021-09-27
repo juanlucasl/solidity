@@ -222,11 +222,15 @@ string Predicate::formatSummaryCall(
 	if (_appendTxVars)
 	{
 		set<string> txVars;
-		if (isFunctionSummary() && programFunction()->isPayable())
-			txVars.insert("msg.value");
+		if (isFunctionSummary())
+		{
+			solAssert(programFunction(), "");
+			if (programFunction()->isPayable())
+				txVars.insert("msg.value");
+		}
 		else if (isConstructorSummary())
 		{
-			auto fun = programFunction();
+			FunctionDefinition const* fun = programFunction();
 			if (fun && fun->isPayable())
 				txVars.insert("msg.value");
 		}
@@ -237,17 +241,15 @@ string Predicate::formatSummaryCall(
 			{
 				Expression const* memberExpr = SMTEncoder::innermostTuple(_memberAccess.expression());
 
-				auto const& exprType = memberExpr->annotation().type;
+				Type const* exprType = memberExpr->annotation().type;
 				solAssert(exprType, "");
 				if (exprType->category() == Type::Category::Magic)
-				{
 					if (auto const* identifier = dynamic_cast<Identifier const*>(memberExpr))
 					{
-						auto const& name = identifier->name();
+						ASTString const& name = identifier->name();
 						if (name == "block" || name == "msg" || name == "tx")
 							txVars.insert(name + "." + _memberAccess.memberName());
 					}
-				}
 
 				return true;
 			}
@@ -261,6 +263,7 @@ string Predicate::formatSummaryCall(
 			txVars += txVarsVisitor.txVars;
 		}
 
+		// Here we are interested in txData from the summary predicate.
 		auto txValues = readTxVars(_args.at(4));
 		vector<string> values;
 		for (auto const& _var: txVars)
