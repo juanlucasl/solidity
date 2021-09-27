@@ -66,6 +66,21 @@ SMTCheckerTest::SMTCheckerTest(string const& _filename): SyntaxTest(_filename, E
 		m_ignoreCex = true;
 	else
 		BOOST_THROW_EXCEPTION(runtime_error("Invalid SMT counterexample choice."));
+
+	auto const& os = m_reader.stringSetting("SMTIgnoreOS", "none");
+	for (auto&& o: os | ranges::views::split(',') | ranges::to<vector<string>>())
+	{
+#ifdef __APPLE__
+		if (o == "macos")
+			m_shouldRun = false;
+#elif _WIN32
+		if (o == "windows")
+			m_shouldRun = false;
+#elif __linux__
+		if (o == "linux")
+			m_shouldRun = false;
+#endif
+	}
 }
 
 TestCase::TestResult SMTCheckerTest::run(ostream& _stream, string const& _linePrefix, bool _formatted)
