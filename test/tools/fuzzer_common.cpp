@@ -109,6 +109,7 @@ void FuzzerUtil::testCompiler(
 			/*invariants*/false,
 			/*showUnproved=*/false,
 			smtutil::SMTSolverChoice::All(),
+			frontend::ModelCheckerTargets::Default(),
 			/*timeout=*/1
 		});
 	}
