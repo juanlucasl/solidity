@@ -1731,7 +1731,7 @@ void CHC::checkVerificationTargets()
 			string msg = "Contract invariants and external call properties for " + what + ":\n";
 			for (auto const& inv: invs)
 				msg += inv + "\n";
-			m_errorReporter.warning(
+			m_errorReporter.info(
 				1180_error,
 				node->location(),
 				msg
