@@ -18,15 +18,24 @@
 
 #pragma once
 
+/**
+ * Formats SMT expressions into Solidity-like strings.
+ */
+
 #include <libsolidity/formal/Predicate.h>
 
 #include <map>
-#include <set>
 #include <string>
 
 namespace solidity::frontend::smt
 {
 
-std::map<ASTNode const*, std::set<std::string>> collectInvariants(smtutil::Expression const& _proof, std::set<Predicate const*> const& _predicates);
+/// @returns another smtutil::Expressions where every term in _from
+/// may be replaced if it is in the substitution map _subst.
+smtutil::Expression substitute(smtutil::Expression _from, std::map<std::string, std::string> const& _subst);
+
+/// @returns a Solidity-like expression string built from _expr.
+/// This is done at best-effort and is not guaranteed to always create a perfect Solidity expression string.
+std::string toSolidityStr(smtutil::Expression const& _expr);
 
 }
