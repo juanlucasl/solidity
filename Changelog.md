@@ -8,7 +8,7 @@ Compiler Features:
 
 
 Bugfixes:
-
+  * SMTChecker: Fix internal error in magic type access (``block``, ``msg``, ``tx``).
 
 
 ### 0.8.8 (2021-09-27)
