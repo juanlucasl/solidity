@@ -16,3 +16,4 @@ contract C is B {
 // SMTEngine: all
 // SMTSolvers: z3
 // ----
+// Info 1180: (136-204): Contract invariants and external call properties for :C:\n(!(x <= 1) && !(x >= 3))\n

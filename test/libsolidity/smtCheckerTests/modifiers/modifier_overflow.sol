@@ -15,3 +15,4 @@ contract C
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-123): Contract invariants and external call properties for :C:\n(x <= 0)\n

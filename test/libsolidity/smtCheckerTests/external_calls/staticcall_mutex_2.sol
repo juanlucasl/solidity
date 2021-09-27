@@ -24,3 +24,4 @@ contract C {
 // ----
 // Warning 9302: (212-234): Return value of low-level calls not used.
 // Warning 2018: (164-271): Function state mutability can be restricted to view
+// Info 1180: (0-273): Contract invariants and external call properties for :C:\n(<errorCode> <= 0)\n

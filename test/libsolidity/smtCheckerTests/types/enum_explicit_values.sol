@@ -11,3 +11,4 @@ contract C
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-133): Contract invariants and external call properties for :C:\n((d = 0) || (d = 1))\n

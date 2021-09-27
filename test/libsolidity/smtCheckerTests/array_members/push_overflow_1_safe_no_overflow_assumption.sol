@@ -9,3 +9,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-121): Contract invariants and external call properties for :C:\n(!((x[x.length] := 23)[0] >= 43) && !((x[x.length] := 23)[0] <= 41))\n

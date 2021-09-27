@@ -27,3 +27,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (57-300): Contract invariants and external call properties for :C:\n((((x' + ((- 1) * x)) = 0) || !lock) && (<errorCode> <= 0) && (lock' || !lock))\n

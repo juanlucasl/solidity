@@ -10,3 +10,4 @@ contract C
 // SMTEngine: all
 // SMTSolvers: z3
 // ----
+// Info 1180: (0-117): Contract invariants and external call properties for :C:\n!map[true]\n

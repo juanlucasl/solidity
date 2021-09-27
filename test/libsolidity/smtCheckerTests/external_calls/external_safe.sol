@@ -17,3 +17,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (57-187): Contract invariants and external call properties for :C:\n!(<errorCode> = 1)\n!(x >= 11)\n((!(x <= 10) || !(<errorCode> >= 3)) && (!(x <= 10) || !(x' >= 11)))\n

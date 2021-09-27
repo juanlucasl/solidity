@@ -59,6 +59,8 @@ SMTCheckerTest::SMTCheckerTest(string const& _filename): SyntaxTest(_filename, E
 	if (m_modelCheckerSettings.solvers.none() || m_modelCheckerSettings.engine.none())
 		m_shouldRun = false;
 
+	m_modelCheckerSettings.invariants = true;
+
 	auto const& ignoreCex = m_reader.stringSetting("SMTIgnoreCex", "no");
 	if (ignoreCex == "no")
 		m_ignoreCex = false;

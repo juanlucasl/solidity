@@ -23,3 +23,4 @@ contract C {
 // SMTEngine: all
 // ----
 // Warning 9302: (218-234): Return value of low-level calls not used.
+// Info 1180: (0-273): Contract invariants and external call properties for :C:\n((!lock || ((x' + ((- 1) * x)) = 0)) && (<errorCode> <= 0) && (lock' || !lock))\n

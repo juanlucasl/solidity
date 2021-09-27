@@ -18,3 +18,4 @@ contract C {
 // SMTEngine: all
 // ----
 // Warning 6328: (167-181): CHC: Assertion violation happens here.
+// Info 1180: (57-187): Contract invariants and external call properties for :C:\n!(<errorCode> = 1)\n

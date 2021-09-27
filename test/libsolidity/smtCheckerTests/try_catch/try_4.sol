@@ -28,4 +28,5 @@ contract C {
 // Warning 1218: (178-192): CHC: Error trying to invoke SMT solver.
 // Warning 6328: (178-192): CHC: Assertion violation might happen here.
 // Warning 6328: (318-332): CHC: Assertion violation happens here.
+// Info 1180: (57-357): Contract invariants and external call properties for :C:\n!(<errorCode> = 2)\n
 // Warning 4661: (178-192): BMC: Assertion violation happens here.

@@ -16,3 +16,4 @@ contract C {
 // SMTEngine: all
 // ----
 // Warning 6328: (192-206): CHC: Assertion violation happens here.\nCounterexample:\n\ny = 42\n\nTransaction trace:\nC.constructor()\nC.f()
+// Info 1180: (0-227): Contract invariants and external call properties for :C:\n!(m.length <= 0)\n

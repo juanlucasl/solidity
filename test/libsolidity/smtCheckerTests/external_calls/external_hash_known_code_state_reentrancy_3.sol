@@ -41,3 +41,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (97-581): Contract invariants and external call properties for :C:\n((!insidef || !(<errorCode> >= 2)) && (!(y <= 0) || (y' <= 0)) && (insidef' || !insidef))\n((!insidef || !(<errorCode> >= 3)) && (insidef' || !insidef))\n((insidef || (z <= 0)) && (y <= 0))\n

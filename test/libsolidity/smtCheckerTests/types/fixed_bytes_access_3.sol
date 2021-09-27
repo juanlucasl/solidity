@@ -31,4 +31,6 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Warning 6368: (374-381): CHC: Out of bounds access might happen here.
 // Warning 6368: (456-462): CHC: Out of bounds access happens here.
+// Info 1180: (0-481): Contract invariants and external call properties for :C:\n!(a.length <= 4)\n

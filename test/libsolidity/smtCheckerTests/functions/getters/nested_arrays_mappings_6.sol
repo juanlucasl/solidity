@@ -19,3 +19,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-393): Contract invariants and external call properties for :C:\n!(m[0][1][2].length <= 3)\n

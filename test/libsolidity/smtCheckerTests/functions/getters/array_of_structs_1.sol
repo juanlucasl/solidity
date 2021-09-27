@@ -15,3 +15,4 @@ contract D {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (55-203): Contract invariants and external call properties for :D:\n(items[1][2][3].y <= 0)\n

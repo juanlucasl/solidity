@@ -13,3 +13,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-183): Contract invariants and external call properties for :C:\nlock\n

@@ -18,3 +18,4 @@ contract C is B {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (149-218): Contract invariants and external call properties for :C:\n(!(y <= 41) && !(y >= 43))\n

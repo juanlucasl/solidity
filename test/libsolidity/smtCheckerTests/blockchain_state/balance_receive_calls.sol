@@ -24,3 +24,4 @@ contract C {
 // Warning 6328: (173-208): CHC: Assertion violation happens here.\nCounterexample:\nonce = true\n\nTransaction trace:\nC.constructor()\nState: once = false\nC.f(){ value: 10 }
 // Warning 6328: (321-356): CHC: Assertion violation happens here.\nCounterexample:\nonce = true\n\nTransaction trace:\nC.constructor()\nState: once = false\nC.f(){ value: 10 }\n    C.g(){ value: 10 } -- internal call
 // Warning 6328: (469-504): CHC: Assertion violation happens here.\nCounterexample:\nonce = true\n\nTransaction trace:\nC.constructor()\nState: once = false\nC.f(){ value: 10 }\n    C.g(){ value: 10 } -- internal call\n        C.h(){ value: 10 } -- internal call
+// Info 1180: (0-525): Contract invariants and external call properties for :C:\n((:var 1).balances[address(this)] >= 0)\nonce\n

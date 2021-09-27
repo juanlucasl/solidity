@@ -21,3 +21,4 @@ contract C {
 // SMTIgnoreCex: yes
 // ----
 // Warning 6328: (274-288): CHC: Assertion violation happens here.
+// Info 1180: (0-309): Contract invariants and external call properties for :C:\n!(m[0].length <= 1)\n!(m[0][1].length <= 2)\n

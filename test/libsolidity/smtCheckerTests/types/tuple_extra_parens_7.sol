@@ -12,3 +12,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-202): Contract invariants and external call properties for :C:\n!(<errorCode> >= 2)\n(<errorCode> <= 0)\n

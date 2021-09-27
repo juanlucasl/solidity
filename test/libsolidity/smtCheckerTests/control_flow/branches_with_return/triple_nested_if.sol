@@ -18,3 +18,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-203): Contract invariants and external call properties for :C:\n((c <= 0) && (a <= 0) && (b <= 0))\n

@@ -14,3 +14,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-208): Contract invariants and external call properties for :C:\n(((t + ((- 1) * address(this))) >= 0) && ((t + ((- 1) * address(this))) <= 0))\n

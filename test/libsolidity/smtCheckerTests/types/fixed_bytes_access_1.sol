@@ -7,3 +7,4 @@ contract c {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (0-108): Contract invariants and external call properties for :c:\n!(data2.length <= 5)\n

@@ -23,4 +23,5 @@ contract C {
 // SMTIgnoreCex: yes
 // ----
 // Warning 6328: (335-354): CHC: Assertion violation might happen here.
+// Info 1180: (0-360): Contract invariants and external call properties for :C:\n!(a.length <= 2)\n!(a.length <= 3)\n
 // Warning 4661: (335-354): BMC: Assertion violation happens here.

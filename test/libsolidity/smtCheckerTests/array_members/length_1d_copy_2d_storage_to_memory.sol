@@ -17,3 +17,4 @@ contract C {
 // ====
 // SMTEngine: all
 // ----
+// Info 1180: (35-281): Contract invariants and external call properties for :C:\n!(arr.length <= 1)\n
