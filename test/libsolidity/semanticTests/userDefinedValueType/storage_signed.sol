@@ -18,6 +18,10 @@ contract C {
     function div() external returns (int16) {
         return MyInt.unwrap(a) / 2;
     }
+    function viaasm() external returns (bytes32 x) {
+        MyInt st = a;
+        assembly { x := st }
+    }
 }
 // ====
 // compileViaYul: also
@@ -28,3 +32,4 @@ contract C {
 // toMemDirect() -> -2
 // toMemIndirect() -> -2
 // div() -> -1
+// viaasm() -> 0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe
