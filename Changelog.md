@@ -1,14 +1,7 @@
 ### 0.8.9 (unreleased)
 
-Language Features:
-
-
-Compiler Features:
-
-
-
-Bugfixes:
-
+Important Bugfixes:
+ * Immutables: Properly perform sign extension on signed immutables.
 
 
 ### 0.8.8 (2021-09-27)
